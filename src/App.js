@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
-import MainPage from './components/MainPage';
-import Favorites from './components/Favorites';
+import MainPage from './Pages/MainPage';
+import Favorites from './Pages/Favorites';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import store from './store/store';

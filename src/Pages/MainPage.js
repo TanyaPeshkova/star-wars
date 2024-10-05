@@ -2,6 +2,8 @@ import React, {useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {fetchCharacters} from '../api/api';
 import { setCharacters, addFavorite,setCurrentPage  } from '../store/charactersSlice';
+import Layout from "../components/Layout";
+
 
 const MainPage = () => {
     const characters = useSelector((state) => state.characters.allCharacters);
@@ -31,7 +33,7 @@ const MainPage = () => {
       const currentCharacters = filteredCharacters.slice(indexOfFirstCharacter, indexOfLastCharacter);
     
     return (
-        <div>
+        <Layout>
       <h1>Персонажи Звездных Войн</h1>
       <input 
         type="text" 
@@ -49,7 +51,7 @@ const MainPage = () => {
       </div>
       <button onClick={() => dispatch(setCurrentPage(currentPage - 1))} disabled={currentPage === 1}>Previous</button>
       <button onClick={() => dispatch(setCurrentPage(currentPage + 1))} disabled={indexOfLastCharacter >= filteredCharacters.length}>Next</button>
-    </div>
+    </Layout>
     )
 }
 
