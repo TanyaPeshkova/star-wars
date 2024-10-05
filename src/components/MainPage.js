@@ -4,8 +4,8 @@ import {fetchCharacters} from '../api/api';
 import { setCharacters, addFavorite } from '../store/charactersSlice';
 
 const MainPage = () => {
-    const dispatch = useDispatch();
     const characters = useSelector((state) => state.characters.allCharacters);
+    const dispatch = useDispatch();
     const [page, setPage] = useState(1);
     const [search, setSearch] = useState('');
 

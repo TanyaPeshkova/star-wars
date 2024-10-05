@@ -4,7 +4,7 @@ const charactersSlice = createSlice({
     name: 'characters',
     initialState: {
         allCharacters:[],
-        favorites:[],
+        favorites:JSON.parse(localStorage.getItem('favorites')) || [],
     },
     reducers: {
         setCharacters(state, action) {
@@ -12,11 +12,14 @@ const charactersSlice = createSlice({
         },
         addFavorite(state, action) {
             state.favorites.push(action.payload);
+            localStorage.setItem('favorites', JSON.stringify(state.favorites)
+            )
         },
         removeFavorite(state, action) {
             state.favorites = state.favorites.filter(character =>
                 character.name !== action.payload.name 
              );
+             localStorage.setItem('favorites', JSON.stringify(state.favorites))
         },
     }
 });
