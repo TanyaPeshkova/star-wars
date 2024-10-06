@@ -19,13 +19,16 @@ const Favorites = () => {
     return(
         <Layout>
             <h1>Ваши любимые персонажи</h1>
-            {favorites.map(character => (
+            <div className="main">
+                 {favorites.map(character => (
                 <FavoritesCard 
                 key={character.name} 
                 character={character} 
             />
               
             ))}
+            </div>
+           
         </Layout>
     )
 }

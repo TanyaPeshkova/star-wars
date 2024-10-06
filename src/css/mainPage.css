@@ -3,4 +3,20 @@ input {
     margin-left: auto;
     margin-right: auto;
     width: 30%;
+    
 }
+
+.input {
+    height: 44px;
+    position: relative;
+    margin: 10px;
+    
+  }
+  .input input {
+    height: 100%;
+    font: 16px/24px Arial, sans-serif;
+    padding: 8px 20px 8px 44px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    
+  }

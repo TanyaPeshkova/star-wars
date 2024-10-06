@@ -6,6 +6,8 @@ import Layout from "../components/Layout";
 import Spinner from "../components/Spinner";
 import '../css/mainPage.css'
 import CharacterCard from "../components/CharacterCard";
+import Pagination from "../components/Pagination";
+import { SlMagnifier } from "react-icons/sl";
 
 const MainPage = () => {
     const characters = useSelector((state) => state.characters.allCharacters);
@@ -20,7 +22,6 @@ const MainPage = () => {
           const data = await fetchFirstPageCharacters(page);
           dispatch(setCharacters(data));
           setLoading(false);
-
           const allCharacters  = await fetchAllCharacters();
           dispatch(setCharacters(allCharacters));
 
@@ -39,18 +40,27 @@ const MainPage = () => {
       const indexOfLastCharacter = currentPage * itemsPerPage;
       const indexOfFirstCharacter = indexOfLastCharacter - itemsPerPage;
       const currentCharacters = filteredCharacters.slice(indexOfFirstCharacter, indexOfLastCharacter);
+      const totalPages = Math.ceil(filteredCharacters.length / itemsPerPage);
+      const handlePageChange = (pageNumber) => {
+        dispatch(setCurrentPage(pageNumber));
+    };
     
-    return (
+      return (
         <Layout>
       <h1>Персонажи Звездных Войн</h1>
+      <div className="input">
       <input 
         type="text" 
-        placeholder="Search by name" 
+        placeholder="Начните вводить имя" 
         value={search} 
+        class="search-field" 
         onChange={(e) => setSearch(e.target.value)} 
       />
+
+      </div>
+     
       {loading ? <Spinner /> : (
-      <div>
+      <div >
 
         {currentCharacters.map(character => (
            <CharacterCard 
@@ -62,8 +72,11 @@ const MainPage = () => {
         ))}
       </div>
         )}
-      <button onClick={() => dispatch(setCurrentPage(currentPage - 1))} disabled={currentPage === 1}>Previous</button>
-      <button onClick={() => dispatch(setCurrentPage(currentPage + 1))} disabled={indexOfLastCharacter >= filteredCharacters.length}>Next</button>
+      <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+            />
     </Layout>
     )
 }
