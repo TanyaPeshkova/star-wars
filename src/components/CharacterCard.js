@@ -11,10 +11,14 @@ const CharacterCard = ({character, onFavorite}) => {
     const handleRemove = (character) => {
         dispatch(removeFavorite(character));
       };
+    
+   
     return (
-        <div className="character_card">
-            <h2>{character.name}</h2>
-            <button  className={`favorite_button ${isFavorite ? 'active' : ''}`} onClick={()=>{
+        <div class="card">
+            <img src={character.image} alt="Avatar" style={{width:'100%'}} />
+            <div class="container">
+                <h4><b>{character.name}</b></h4>
+                <button  className={`favorite_button ${isFavorite ? 'active' : ''}`} onClick={()=>{
                 if (isFavorite) {
                     handleRemove(character)
                 }else {
@@ -26,7 +30,10 @@ const CharacterCard = ({character, onFavorite}) => {
                     <CiHeart/>
                     }
                     </button>
+            </div>
+            
         </div>
+
     )
 }
 export default CharacterCard

@@ -23,16 +23,7 @@ h1 {
     text-align: center;
 }
 
-.character_card {
-    border: 1px solid black;
-    border-radius: 15px;
-    display: block;
-    padding: 3%;
-    position: relative;
-    margin: 3%;
-    background-color: rgba(0, 0, 0, 0.7)   ;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
-}
+
 .favorite_button {
     position: absolute; 
     top: 10px; 
@@ -46,4 +37,42 @@ h1 {
 }
 .active {
     color: red;
+}
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:space-evenly; 
+    max-width: 100%; 
+    margin:  0 5%;
+    margin-top: 5%;
+
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px; 
+    max-width: calc(33.33% - 10px); 
+    margin-bottom: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px; 
+    position: relative; 
+
+}
+.container {
+    text-align: center;
+}
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px; 
+    background: rgba(0, 0, 0, 0.7); 
+    padding: 10px;
+    position: relative;
+}
+img {
+    border-radius: 5px 5px 0 0;
+}
+.cards {
+    display: block;
 }

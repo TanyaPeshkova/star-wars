@@ -44,7 +44,7 @@ const MainPage = () => {
       const handlePageChange = (pageNumber) => {
         dispatch(setCurrentPage(pageNumber));
     };
-    
+
       return (
         <Layout>
       <h1>Персонажи Звездных Войн</h1>
@@ -53,14 +53,16 @@ const MainPage = () => {
         type="text" 
         placeholder="Начните вводить имя" 
         value={search} 
-        class="search-field" 
+        className="search-field" 
         onChange={(e) => setSearch(e.target.value)} 
       />
 
       </div>
      
       {loading ? <Spinner /> : (
-      <div >
+        <div className="cards">
+              <div class="card-container">
+
 
         {currentCharacters.map(character => (
            <CharacterCard 
@@ -70,8 +72,9 @@ const MainPage = () => {
        />
        
         ))}
-      </div>
+      </div></div>
         )}
+
       <Pagination
                 currentPage={currentPage}
                 totalPages={totalPages}
