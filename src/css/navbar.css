@@ -3,7 +3,9 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #333;
+    background-color: rgba(0, 0, 0, 0.7); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); 
+    transition: color 0.3s ease;
 }
 
 li {
@@ -11,19 +13,14 @@ li {
 }
 li a {
     display: block;
-    color: white;
+    /* color: white; */
+    color: rgba(255, 255, 255, 0.8); 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
 }
-#all_char {
-    text-shadow: 1px 1px 2px red, 0 0 1em red, 0 0 0.2em red;
 
-}
-#favorite {
-    text-shadow: 1px 1px 2px blue, 0 0 1em blue, 0 0 0.2em blue;
-
-}
 li a:hover {
-    background-color: #111;
+    color: #3498db;
 }

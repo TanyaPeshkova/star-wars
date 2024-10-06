@@ -2,6 +2,8 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {removeFavorite} from '../store/charactersSlice'
 import Layout from "../components/Layout";
+import FavoritesCard from "../components/FavoritesCard"
+
 
 
 const Favorites = () => {
@@ -12,16 +14,17 @@ const Favorites = () => {
     const handleRemove = (character) => {
         dispatch(removeFavorite(character))
     }
+    
 
     return(
         <Layout>
+            <h1>Ваши любимые персонажи</h1>
             {favorites.map(character => (
-                <div key={character.name}>
-                    <p>
-                        {character.name}
-                    </p>
-                    <button onClick={()=>handleRemove(character)}>Удалить из списка любимых персонажей</button>
-                </div>
+                <FavoritesCard 
+                key={character.name} 
+                character={character} 
+            />
+              
             ))}
         </Layout>
     )

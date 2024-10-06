@@ -5,6 +5,8 @@ import Favorites from './Pages/Favorites';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import store from './store/store';
+import './css/general.css'
+
 
 function App() {
   return (
