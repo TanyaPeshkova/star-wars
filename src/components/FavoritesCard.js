@@ -15,7 +15,7 @@ const FavoritesCard = ({character}) => {
       };
     return (
       <div class="card">
-      <img src={character.image} alt="Avatar" style={{width:'100%'}} />
+      <img src={character.image} alt="character" style={{width:'100%'}} />
       <div class="container">
           <h4><b>{character.name}</b></h4>
           <p>Родная планета: {character.homeworld}</p>
