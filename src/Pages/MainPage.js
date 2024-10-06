@@ -7,43 +7,44 @@ import Spinner from "../components/Spinner";
 import '../css/mainPage.css'
 import CharacterCard from "../components/CharacterCard";
 import Pagination from "../components/Pagination";
-import { SlMagnifier } from "react-icons/sl";
 
 const MainPage = () => {
     const characters = useSelector((state) => state.characters.allCharacters);
     const currentPage = useSelector((state) => state.characters.currentPage);
     const itemsPerPage = useSelector((state) => state.characters.itemsPerPage);
     const dispatch = useDispatch();
-    const [page, setPage] = useState(1);
     const [search, setSearch] = useState('');
     const [loading, setLoading]  = useState(true);
+    const [page, setPage]  = useState(1);
+
     useEffect(() => {
-        const loadCharacters = async () => {
-          if (search) {
+      const loadCharacters = async () => {
+        setLoading(true);
+          if (search.trim() !== '') {
             const data = await fetchCharactersByName(search);
             dispatch(setCharacters(data));
         } else {
-            const data = await fetchFirstPageCharacters();
+            const data = await fetchFirstPageCharacters(page);
             dispatch(setCharacters(data));
         }
           setLoading(false);
 
-        };
-        loadCharacters();
-
-      }, [search, dispatch]);
-
-      const handleFavorite = (character) => {
-        dispatch(addFavorite(character));
       };
+      loadCharacters();
+  }, [search,page,dispatch]);
 
-    
-      const filteredCharacters = characters.filter(char => char.name.toLowerCase().includes(search.toLowerCase()));
+  const handleFavorite = (character) => {
+      dispatch(addFavorite(character));
+  };
+  const handlePageChange = (currentPage) => {
+    dispatch(setCurrentPage(currentPage));
+    setPage(currentPage)
+};
 
-      const totalPages = Math.ceil(filteredCharacters.length / itemsPerPage);
-      const handlePageChange = (pageNumber) => {
-        dispatch(setCurrentPage(pageNumber));
-    };
+  const filteredCharacters = characters.filter(char => 
+      char.name.toLowerCase().includes(search.toLowerCase())
+  );
+  const totalPages = Math.ceil(82 / itemsPerPage);
 
       return (
         <Layout>
@@ -64,7 +65,7 @@ const MainPage = () => {
               <div class="card-container">
 
 
-        {filteredCharacters.map(character => (
+        {filteredCharacters .map(character => (
            <CharacterCard 
            key={character.name} 
            character={character} 

@@ -3,12 +3,11 @@ import axios from "axios";
 const API_URL = ' https://swapi.dev/api/people';
 
 
-export const fetchFirstPageCharacters = async () => {
+export const fetchFirstPageCharacters = async (page) => {
     try {
-        const response = await axios.get(API_URL);
+        const response = await axios.get(`${API_URL}?page=${page}`);
         const characters = await Promise.all(
             response.data.results.map(async (character) => {
-
                 const homeworldResponse = await axios.get(character.homeworld);
                 return {
                     ...character,
@@ -29,7 +28,9 @@ export const fetchFirstPageCharacters = async () => {
 export const fetchCharactersByName = async (name) => {
     try {
         const response = await axios.get(`${API_URL}/?search=${name}`);
+        
         const characters = await Promise.all(
+            
             response.data.results.map(async (character) => {
                 const homeworldResponse = await axios.get(character.homeworld);
                 return {
