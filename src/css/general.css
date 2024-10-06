@@ -1,0 +1,41 @@
+@font-face {
+    font-family: 'StarJedi'; 
+    src: url('../assets/fonts/starjedi_cyrillic.otf') format('opentype'); 
+}
+body {
+    font-family: 'StarJedi', sans-serif;
+    font-weight: 200;
+    background: linear-gradient(45deg, #00008B, #8B0000); 
+    color: rgba(255, 255, 255, 0.8); 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    letter-spacing: 3px; 
+    height:100%;
+}
+h1 {
+    text-align: center;
+}
+
+.character_card {
+    border: 1px solid black;
+    border-radius: 15px;
+    display: block;
+    padding: 3%;
+    position: relative;
+    margin: 3%;
+    background-color: rgba(0, 0, 0, 0.7)   ;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+}
+.favorite_button {
+    position: absolute; 
+    top: 10px; 
+    right: 10px; 
+    background: transparent;
+    border: none; 
+    cursor: pointer; 
+    font-size: 40px; 
+    color: rgba(255, 255, 255, 0.8); 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+.active {
+    color: red;
+}
