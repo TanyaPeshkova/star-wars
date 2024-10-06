@@ -1,8 +1,8 @@
 import React, { useState, useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {removeFavorite} from '../store/charactersSlice'
-import { FaRegTrashCan } from "react-icons/fa6";
-import { FaTrashAlt } from "react-icons/fa";
+import { RxCross1 } from "react-icons/rx";
+import { RxCross2 } from "react-icons/rx";
 import {fetchPlanets} from '../api/api';
 
 
@@ -22,7 +22,7 @@ const FavoritesCard = ({character}) => {
           <button  className={`favorite_button ${isHovered ? 'active' : ''}`}onClick={()=>handleRemove(character)}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)} >
-      {isHovered ? <FaTrashAlt /> : <FaRegTrashCan />}
+      {isHovered ? <RxCross1 /> : <RxCross2 />}
     </button>
       </div>
       

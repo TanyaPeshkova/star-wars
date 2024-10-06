@@ -13,7 +13,7 @@ input {
   }
   .input input {
     height: 100%;
-    font: 16px/24px Arial, sans-serif;
+    font: 24px/30px Arial, sans-serif;
     padding: 8px 20px 8px 44px;
     border: 1px solid #ccc;
     border-radius: 4px;

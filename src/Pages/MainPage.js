@@ -1,12 +1,14 @@
 import React, {useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {fetchFirstPageCharacters, fetchAllCharacters, fetchCharactersByName  } from '../api/api';
+import {fetchFirstPageCharacters, fetchCharactersByName ,fetchCharactersByGender } from '../api/api';
 import { setCharacters, addFavorite, setCurrentPage  } from '../store/charactersSlice';
 import Layout from "../components/Layout";
 import Spinner from "../components/Spinner";
 import '../css/mainPage.css'
 import CharacterCard from "../components/CharacterCard";
 import Pagination from "../components/Pagination";
+import GenderFilter from "../components/GenderFilter";
+
 
 const MainPage = () => {
     const characters = useSelector((state) => state.characters.allCharacters);
@@ -16,6 +18,7 @@ const MainPage = () => {
     const [search, setSearch] = useState('');
     const [loading, setLoading]  = useState(true);
     const [page, setPage]  = useState(1);
+    const [genderFilter, setGenderFilter] = useState('');
 
     useEffect(() => {
       const loadCharacters = async () => {
@@ -23,7 +26,12 @@ const MainPage = () => {
           if (search.trim() !== '') {
             const data = await fetchCharactersByName(search);
             dispatch(setCharacters(data));
-        } else {
+        } 
+        else if (genderFilter !== ''){
+          const data = await await fetchCharactersByGender(genderFilter);;
+          dispatch(setCharacters(data));
+        } 
+        else {
             const data = await fetchFirstPageCharacters(page);
             dispatch(setCharacters(data));
         }
@@ -31,7 +39,7 @@ const MainPage = () => {
 
       };
       loadCharacters();
-  }, [search,page,dispatch]);
+  }, [genderFilter, search,page,dispatch]);
 
   const handleFavorite = (character) => {
       dispatch(addFavorite(character));
@@ -42,10 +50,11 @@ const MainPage = () => {
 };
 
   const filteredCharacters = characters.filter(char => 
-      char.name.toLowerCase().includes(search.toLowerCase())
+      char.name.toLowerCase().includes(search.toLowerCase())  
   );
   const totalPages = Math.ceil(82 / itemsPerPage);
 
+  
       return (
         <Layout>
       <h1>Персонажи Звездных Войн</h1>
@@ -58,11 +67,15 @@ const MainPage = () => {
         onChange={(e) => setSearch(e.target.value)} 
       />
 
+<GenderFilter
+                    value={genderFilter}
+                    onChange={setGenderFilter}
+                />
       </div>
      
       {loading ? <Spinner /> : (
         <div className="cards">
-              <div class="card-container">
+              <div className="card-container">
 
 
         {filteredCharacters .map(character => (
@@ -75,12 +88,15 @@ const MainPage = () => {
         ))}
       </div></div>
         )}
-
-      <Pagination
+{genderFilter === ''?<Pagination
                 currentPage={currentPage}
                 totalPages={totalPages}
                 onPageChange={handlePageChange}
-            />
+            />: (
+              <div></div>
+            )
+            }
+      
     </Layout>
     )
 }
