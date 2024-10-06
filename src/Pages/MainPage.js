@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {fetchFirstPageCharacters, fetchAllCharacters } from '../api/api';
+import {fetchFirstPageCharacters, fetchAllCharacters, fetchCharactersByName  } from '../api/api';
 import { setCharacters, addFavorite, setCurrentPage  } from '../store/charactersSlice';
 import Layout from "../components/Layout";
 import Spinner from "../components/Spinner";
@@ -19,16 +19,19 @@ const MainPage = () => {
     const [loading, setLoading]  = useState(true);
     useEffect(() => {
         const loadCharacters = async () => {
-          const data = await fetchFirstPageCharacters(page);
-          dispatch(setCharacters(data));
+          if (search) {
+            const data = await fetchCharactersByName(search);
+            dispatch(setCharacters(data));
+        } else {
+            const data = await fetchFirstPageCharacters();
+            dispatch(setCharacters(data));
+        }
           setLoading(false);
-          const allCharacters  = await fetchAllCharacters();
-          dispatch(setCharacters(allCharacters));
 
         };
         loadCharacters();
 
-      }, [page, dispatch]);
+      }, [search, dispatch]);
 
       const handleFavorite = (character) => {
         dispatch(addFavorite(character));
@@ -37,9 +40,6 @@ const MainPage = () => {
     
       const filteredCharacters = characters.filter(char => char.name.toLowerCase().includes(search.toLowerCase()));
 
-      const indexOfLastCharacter = currentPage * itemsPerPage;
-      const indexOfFirstCharacter = indexOfLastCharacter - itemsPerPage;
-      const currentCharacters = filteredCharacters.slice(indexOfFirstCharacter, indexOfLastCharacter);
       const totalPages = Math.ceil(filteredCharacters.length / itemsPerPage);
       const handlePageChange = (pageNumber) => {
         dispatch(setCurrentPage(pageNumber));
@@ -64,7 +64,7 @@ const MainPage = () => {
               <div class="card-container">
 
 
-        {currentCharacters.map(character => (
+        {filteredCharacters.map(character => (
            <CharacterCard 
            key={character.name} 
            character={character} 
